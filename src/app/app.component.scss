@@ -1,0 +1,17 @@
+.flex-container {
+  display: flex;
+  background-color: greenyellow;
+
+  div {
+    margin: 10px;
+  }
+}
+
+#left-side {
+  border: 2px solid dodgerblue;
+  width: 200px;
+}
+
+#router {
+  border: 1px solid orange;
+}
