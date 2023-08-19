@@ -1,9 +1,9 @@
 .flex-container {
   display: flex;
-  background-color: greenyellow;
+  flex-direction: row;
 
   div {
-    margin: 10px;
+    margin: 1em;
   }
 }
 
@@ -13,5 +13,6 @@
 }
 
 #router {
+  width: 100%;
   border: 1px solid orange;
 }

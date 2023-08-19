@@ -5,12 +5,14 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {LeftSidePanelComponent} from './left-side-panel/left-side-panel.component';
 import {QuickStartComponent} from './quick-start/quick-start.component';
+import {FreeRouteOneComponent} from './free-route-one/free-route-one.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LeftSidePanelComponent,
-    QuickStartComponent
+    QuickStartComponent,
+    FreeRouteOneComponent
   ],
   imports: [
     BrowserModule,
