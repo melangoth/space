@@ -2,4 +2,7 @@
   <a routerLink="/quick-start" routerLinkActive="active">Quick Start</a>
   <a routerLink="/free-route-one" routerLinkActive="active">Free Route One</a>
   <a routerLink="/profile" routerLinkActive="active">Profile</a>
+  <a routerLink="/login" routerLinkActive="active">Login</a>
+  <hr>
+  <div>Logged in user: <span *ngIf="loggedInUser$ | async as loggedInUser">{{ loggedInUser.id }}</span></div>
 </div>

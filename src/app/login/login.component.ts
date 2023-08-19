@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import {CurrentUserService} from "../services/current-user.service";
 
 @Component({
   selector: 'app-login',
@@ -6,5 +7,14 @@ import {Component} from '@angular/core';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
+  constructor(private currentUserService: CurrentUserService) {
+  }
 
+  login() {
+    this.currentUserService.setCurrentUser(7);
+  }
+
+  logout() {
+    this.currentUserService.setCurrentUser();
+  }
 }
