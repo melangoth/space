@@ -4,5 +4,5 @@
   <a routerLink="/profile" routerLinkActive="active">Profile</a>
   <a routerLink="/login" routerLinkActive="active">Login</a>
   <hr>
-  <div>Logged in user: <span *ngIf="loggedInUser$ | async as loggedInUser">{{ loggedInUser.id }}</span></div>
+  <div>Logged in user: <span *ngIf="loggedInUser$ | async as loggedInUser">{{ loggedInUser.name }}</span></div>
 </div>

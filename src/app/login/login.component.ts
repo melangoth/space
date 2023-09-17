@@ -11,7 +11,7 @@ export class LoginComponent {
   }
 
   login() {
-    this.currentUserService.setCurrentUser(7);
+    this.currentUserService.setCurrentUser('i7');
   }
 
   logout() {

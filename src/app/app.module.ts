@@ -8,6 +8,7 @@ import {QuickStartComponent} from './quick-start/quick-start.component';
 import {FreeRouteOneComponent} from './free-route-one/free-route-one.component';
 import {ProfileComponent} from './profile/profile.component';
 import {LoginComponent} from './login/login.component';
+import {AuthButtonComponent} from './auth-button/auth-button.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import {LoginComponent} from './login/login.component';
     QuickStartComponent,
     FreeRouteOneComponent,
     ProfileComponent,
-    LoginComponent
+    LoginComponent,
+    AuthButtonComponent
   ],
   imports: [
     BrowserModule,
