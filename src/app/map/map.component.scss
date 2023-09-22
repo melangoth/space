@@ -1,0 +1,55 @@
+.tile-info {
+  box-sizing: border-box;
+  position: absolute;
+  pointer-events: none;
+  font-weight: 600;
+
+  .i {
+    position: absolute;
+    left: calc(50% - .5em);
+    bottom: calc(50% - .5em);
+  }
+
+  .q {
+    color: #009000;
+    position: absolute;
+    right: calc(50% - .5em);
+    top: 0;
+  }
+
+  .r {
+    color: #000090;
+    position: absolute;
+    right: 15%;
+    bottom: 20%;
+  }
+
+  .s {
+    color: #900000;
+    position: absolute;
+    left: 15%;
+    bottom: 20%;
+  }
+}
+
+.tile-hex-flat {
+  box-sizing: border-box;
+  position: absolute;
+  clip-path: polygon(25% 1%, 75% 1%, 99% 50%, 75% 99%, 25% 99%, 1% 50%);
+}
+
+.tile-hex-flat.normal {
+  background-color: #b0b0b0;
+}
+
+.tile-hex-flat.hovered {
+  background-color: #c0c0c0;
+}
+
+.tile-hex-flat.selected {
+  background-color: #b0b000;
+}
+
+.tile-hex-flat.selected.hovered {
+  background-color: #d0d000;
+}

@@ -1,8 +1,13 @@
 <div class="nav">
   <a routerLink="/quick-start" routerLinkActive="active">Quick Start</a>
   <a routerLink="/free-route-one" routerLinkActive="active">Free Route One</a>
+
+  <hr/>
+  <div>Warlords</div>
+  <a routerLink="/warlords/map">Map</a>
+
+  <hr/>
   <a routerLink="/profile" routerLinkActive="active">Profile</a>
   <a routerLink="/login" routerLinkActive="active">Login</a>
-  <hr>
-  <div>Logged in user: <span *ngIf="loggedInUser$ | async as loggedInUser">{{ loggedInUser.name }}</span></div>
+  <div>Logged in as: <span *ngIf="loggedInUser$ | async as loggedInUser">{{ loggedInUser.name }}</span></div>
 </div>

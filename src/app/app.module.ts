@@ -9,6 +9,7 @@ import {FreeRouteOneComponent} from './free-route-one/free-route-one.component';
 import {ProfileComponent} from './profile/profile.component';
 import {LoginComponent} from './login/login.component';
 import {AuthButtonComponent} from './auth-button/auth-button.component';
+import {WarlordsModule} from "./warlords/warlords.module";
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import {AuthButtonComponent} from './auth-button/auth-button.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    WarlordsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

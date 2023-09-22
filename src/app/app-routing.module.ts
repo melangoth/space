@@ -14,6 +14,7 @@ import {ProfileComponent} from "./profile/profile.component";
 import {Observable} from "rxjs";
 import {CurrentUserService} from "./services/current-user.service";
 import {LoginComponent} from "./login/login.component";
+import {MapComponent} from "./map/map.component";
 
 const profileGuard: CanActivateFn = (
   route: ActivatedRouteSnapshot,
@@ -46,6 +47,9 @@ const routes: Routes = [
   {path: 'free-route-one', component: FreeRouteOneComponent},
   {path: 'profile', component: ProfileComponent, canActivate: [profileGuard]},
   {path: 'login', component: LoginComponent},
+
+  // warlords
+  {path: 'warlords/map', component: MapComponent}
 ];
 
 @NgModule({
