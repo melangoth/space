@@ -1,7 +1,15 @@
+<div class="info-panel">
+  Selected tile:
+  <ng-container *ngIf="selectedTile">
+    <span class="q">{{selectedTile.coords.q}}q</span>
+    <span class="r">{{selectedTile.coords.r}}r</span>
+    <span class="s">{{selectedTile.coords.s}}s</span>
+  </ng-container>
+</div>
 <div
-  (click)=onMouseClick(tile.coords)
-  (mouseenter)="onMouseEnter(tile.coords)"
-  (mouseleave)="onMouseLeave(tile.coords)"
+  (click)=onMouseClick(tile)
+  (mouseenter)="onMouseEnter(tile)"
+  (mouseleave)="onMouseLeave(tile)"
   *ngFor="let tile of tiles$ | async"
   [class.hovered]="tile.mouseOver"
   [class.selected]="tile.selected"

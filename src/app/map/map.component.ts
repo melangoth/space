@@ -1,10 +1,6 @@
 import {Component} from '@angular/core';
 import {ReplaySubject} from "rxjs";
 
-const TILE_RADIUS = 50;
-const TILE_WIDTH = 2 * TILE_RADIUS;
-const TILE_HEIGHT = Math.sqrt(3) * TILE_RADIUS;
-const FIELD_RADIUS = 3;
 
 // https://www.redblobgames.com/grids/hexagons/#coordinates
 
@@ -44,31 +40,34 @@ class Tile extends Coords {
   styleUrls: ['./map.component.scss']
 })
 export class MapComponent {
-  tileWidth = TILE_WIDTH;
-  tileHeight = TILE_HEIGHT;
+  readonly tileRadius = 50;
+  readonly tileWidth = 2 * this.tileRadius;
+  readonly tileHeight = Math.sqrt(3) * this.tileRadius;
+  readonly fieldRadius = 3;
+
   tiles: Map<Coords, Tile> = new Map();
   tiles$ = new ReplaySubject<Tile[]>(1);
+  selectedTile: Tile | undefined;
 
   constructor() {
-    const fieldRadius = FIELD_RADIUS;
     const fieldLeftOffset = /*fieldRadius * 3 / 4 * TILE_WIDTH*/ 200
     const fieldTopOffset = /*fieldRadius * 0.5 * TILE_HEIGHT*/ 50
 
-    for (let q = fieldRadius * -1; q <= fieldRadius; q++) {
-      for (let r = fieldRadius * -1; r <= fieldRadius; r++) {
+    for (let q = this.fieldRadius * -1; q <= this.fieldRadius; q++) {
+      for (let r = this.fieldRadius * -1; r <= this.fieldRadius; r++) {
 
         const coords = new Coords(
           q, r, 0 - q - r
         );
 
-        if (coords.s >= fieldRadius * -1 && coords.s <= fieldRadius) {
+        if (coords.s >= this.fieldRadius * -1 && coords.s <= this.fieldRadius) {
           this.tiles.set(
             coords,
             new Tile
             (
               coords,
-              fieldLeftOffset + (fieldRadius + q) * 3 / 4 * TILE_WIDTH,
-              fieldTopOffset + (fieldRadius + r) * TILE_HEIGHT + q * 0.5 * TILE_HEIGHT,
+              fieldLeftOffset + (this.fieldRadius + q) * 3 / 4 * this.tileWidth,
+              fieldTopOffset + (this.fieldRadius + r) * this.tileHeight + q * 0.5 * this.tileHeight,
             )
           )
         }
@@ -78,24 +77,24 @@ export class MapComponent {
     }
   }
 
-  onMouseEnter(coords: Coords) {
-    const field = this.tiles.get(coords);
-    if (field) {
-      field.mouseOver = true;
-    }
+  onMouseEnter(tile: Tile) {
+    tile.mouseOver = true;
   }
 
-  onMouseLeave(coords: Coords) {
-    const field = this.tiles.get(coords);
-    if (field) {
-      field.mouseOver = false;
-    }
+  onMouseLeave(tile: Tile) {
+    tile.mouseOver = false;
   }
 
-  onMouseClick(coords: Coords) {
-    const field = this.tiles.get(coords);
-    if (field) {
-      field.selected = !field.selected;
+  onMouseClick(tile: Tile) {
+    tile.selected = !tile.selected;
+
+    if (tile.selected) {
+      if (this.selectedTile) {
+        this.selectedTile.selected = false;
+      }
+      this.selectedTile = tile;
+    } else {
+      this.selectedTile = undefined;
     }
   }
 }

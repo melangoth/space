@@ -1,31 +1,46 @@
+.q {
+  color: #009000;
+}
+
+.r {
+  color: #000090;
+}
+
+.s {
+  color: #900000;
+}
+
+.info-panel {
+  .q, .r, .s {
+    font-weight: 600;
+  }
+}
+
 .tile-info {
   box-sizing: border-box;
   position: absolute;
   pointer-events: none;
-  font-weight: 600;
 
   .i {
     position: absolute;
     left: calc(50% - .5em);
     bottom: calc(50% - .5em);
+    font-weight: 600;
   }
 
   .q {
-    color: #009000;
     position: absolute;
     right: calc(50% - .5em);
     top: 0;
   }
 
   .r {
-    color: #000090;
     position: absolute;
     right: 15%;
     bottom: 20%;
   }
 
   .s {
-    color: #900000;
     position: absolute;
     left: 15%;
     bottom: 20%;
