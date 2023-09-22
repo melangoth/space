@@ -40,7 +40,7 @@ class Tile extends Coords {
   styleUrls: ['./map.component.scss']
 })
 export class MapComponent {
-  readonly tileRadius = 50;
+  readonly tileRadius = 70;
   readonly tileWidth = 2 * this.tileRadius;
   readonly tileHeight = Math.sqrt(3) * this.tileRadius;
   readonly fieldRadius = 3;
@@ -50,8 +50,8 @@ export class MapComponent {
   selectedTile: Tile | undefined;
 
   constructor() {
-    const fieldLeftOffset = /*fieldRadius * 3 / 4 * TILE_WIDTH*/ 200
-    const fieldTopOffset = /*fieldRadius * 0.5 * TILE_HEIGHT*/ 50
+    const fieldLeftOffset = /*fieldRadius * 3 / 4 * TILE_WIDTH*/ 0
+    const fieldTopOffset = /*fieldRadius * 0.5 * TILE_HEIGHT*/ 0
 
     for (let q = this.fieldRadius * -1; q <= this.fieldRadius; q++) {
       for (let r = this.fieldRadius * -1; r <= this.fieldRadius; r++) {

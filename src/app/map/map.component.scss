@@ -1,3 +1,16 @@
+$canvas-left-offset: 200px;
+
+#canvas {
+  border: 3px solid purple;
+  position: absolute;
+  left: $canvas-left-offset;
+  top: .5em;
+  width: calc(100% - 1em - $canvas-left-offset);
+  height: calc(100% - 1em);
+  z-index: -1;
+  overflow: scroll;
+}
+
 .q {
   color: #009000;
 }

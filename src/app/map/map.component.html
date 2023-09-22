@@ -6,29 +6,31 @@
     <span class="s">{{selectedTile.coords.s}}s</span>
   </ng-container>
 </div>
-<div
-  (click)=onMouseClick(tile)
-  (mouseenter)="onMouseEnter(tile)"
-  (mouseleave)="onMouseLeave(tile)"
-  *ngFor="let tile of tiles$ | async"
-  [class.hovered]="tile.mouseOver"
-  [class.selected]="tile.selected"
-  [ngClass]="tile.state"
-  [style.height.px]="tileHeight"
-  [style.left.px]="tile.left"
-  [style.top.px]="tile.top"
-  [style.width.px]="tileWidth"
-  class="tile-hex-flat">
-</div>
-<div
-  *ngFor="let tile of tiles$ | async; let i = index;"
-  [style.height.px]="tileHeight"
-  [style.left.px]="tile.left"
-  [style.top.px]="tile.top"
-  [style.width.px]="tileWidth"
-  class="tile-info">
-  <div class="i">{{i}}</div>
-  <div class="q">{{tile.q}}q</div>
-  <div class="r">{{tile.r}}r</div>
-  <div class="s">{{tile.s}}s</div>
+<div id="canvas">
+  <div
+    (click)=onMouseClick(tile)
+    (mouseenter)="onMouseEnter(tile)"
+    (mouseleave)="onMouseLeave(tile)"
+    *ngFor="let tile of tiles$ | async"
+    [class.hovered]="tile.mouseOver"
+    [class.selected]="tile.selected"
+    [ngClass]="tile.state"
+    [style.height.px]="tileHeight"
+    [style.left.px]="tile.left"
+    [style.top.px]="tile.top"
+    [style.width.px]="tileWidth"
+    class="tile-hex-flat">
+  </div>
+  <div
+    *ngFor="let tile of tiles$ | async; let i = index;"
+    [style.height.px]="tileHeight"
+    [style.left.px]="tile.left"
+    [style.top.px]="tile.top"
+    [style.width.px]="tileWidth"
+    class="tile-info">
+    <div class="i">{{i}}</div>
+    <div class="q">{{tile.q}}q</div>
+    <div class="r">{{tile.r}}r</div>
+    <div class="s">{{tile.s}}s</div>
+  </div>
 </div>
