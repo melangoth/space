@@ -24,7 +24,6 @@ export class CurrentUserService {
     this.currentUser = (id && name) ? new CurrentUser(id, name) : undefined;
 
     this._currentUser$.next(this.currentUser);
-    this.router.navigate(['/login']);
   }
 
   getCurrentUser(): CurrentUser | undefined {
