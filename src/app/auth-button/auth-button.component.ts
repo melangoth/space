@@ -2,6 +2,7 @@ import {Component, EventEmitter, NgZone, OnDestroy, OnInit} from '@angular/core'
 import {CurrentUserService} from "../services/current-user.service";
 import {environment} from "../../environments/environment";
 import {Subscription} from "rxjs";
+import {CredentialResponse} from "../model/model";
 
 @Component({
   selector: 'app-auth-button',
@@ -10,7 +11,7 @@ import {Subscription} from "rxjs";
 })
 export class AuthButtonComponent implements OnInit, OnDestroy {
   readonly clientId = environment.google_auth_client_id;
-  credentialResponse = new EventEmitter<string>();
+  credentialResponse = new EventEmitter<CredentialResponse>();
   subs: Subscription[] = [];
 
   constructor(private userService: CurrentUserService, private zone: NgZone) {
@@ -22,14 +23,12 @@ export class AuthButtonComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.subs.push(
-      this.credentialResponse.subscribe(clientId => this.userService.setCurrentUser(clientId))
+      this.credentialResponse.subscribe(credentialResponse => this.userService.setCurrentUser(credentialResponse))
     );
 
-    (<any>window).handleCredentialResponse = (credentials: { clientId: string, credential: string }) => {
-      console.log('handleCredentialResponse', credentials);
-      this.zone.run(() => this.credentialResponse.emit(credentials.clientId));
-      // todo: add credential validation
-      // todo: move validation and user login to backend
+    (<any>window).handleCredentialResponse = (credentialResponse: CredentialResponse) => {
+      console.log('handleCredentialResponse', credentialResponse);
+      this.zone.run(() => this.credentialResponse.emit(credentialResponse));
     }
 
     let node = document.createElement('script');

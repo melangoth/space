@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable} from "rxjs";
 import {Router} from "@angular/router";
+import {CredentialResponse} from "../model/model";
 
 @Injectable({
   providedIn: 'root'
@@ -19,9 +20,13 @@ export class CurrentUserService {
     return this._currentUser$;
   }
 
-  setCurrentUser(id?: string) {
-    let name = (id) ? this.users.get(id) : undefined;
-    this.currentUser = (id && name) ? new CurrentUser(id, name) : undefined;
+  setCurrentUser(credentialResponse?: CredentialResponse) {
+    // https://developers.google.com/identity/gsi/web/guides/verify-google-id-token
+    // todo: add credential validation
+    // todo: move validation and user login to backend
+    // todo: add csrf validation
+    let name = (credentialResponse) ? this.users.get(credentialResponse.clientId) : undefined;
+    this.currentUser = (credentialResponse && name) ? new CurrentUser(credentialResponse.clientId, name) : undefined;
 
     this._currentUser$.next(this.currentUser);
   }
