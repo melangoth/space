@@ -10,6 +10,7 @@ import {ProfileComponent} from './profile/profile.component';
 import {LoginComponent} from './login/login.component';
 import {AuthButtonComponent} from './auth-button/auth-button.component';
 import {WarlordsModule} from "./warlords/warlords.module";
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import {WarlordsModule} from "./warlords/warlords.module";
     AuthButtonComponent
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     AppRoutingModule,
     WarlordsModule
