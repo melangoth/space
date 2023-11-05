@@ -49,6 +49,9 @@ export class MapComponent {
   tiles$ = new ReplaySubject<Tile[]>(1);
   selectedTile: Tile | undefined;
 
+  dragStart = {x: 0, y: 0}
+  dragOffset = {x: 0, y: 0}
+
   constructor() {
     const fieldLeftOffset = /*fieldRadius * 3 / 4 * TILE_WIDTH*/ 0
     const fieldTopOffset = /*fieldRadius * 0.5 * TILE_HEIGHT*/ 0
@@ -96,5 +99,18 @@ export class MapComponent {
     } else {
       this.selectedTile = undefined;
     }
+  }
+
+  onDrag($event: DragEvent) {
+    if ($event.x && $event.y) {
+      this.dragOffset = {
+        x: $event.x - this.dragStart.x,
+        y: $event.y - this.dragStart.y
+      }
+    }
+  }
+
+  onDragStart($event: DragEvent) {
+    this.dragStart = {x: $event.x - this.dragOffset.x, y: $event.y - this.dragOffset.y};
   }
 }

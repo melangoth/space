@@ -1,14 +1,13 @@
 $canvas-left-offset: 200px;
 
 #canvas {
-  border: 3px solid purple;
   position: absolute;
   left: $canvas-left-offset;
-  top: .5em;
+  top: 2em;
   width: calc(100% - 1em - $canvas-left-offset);
-  height: calc(100% - 1em);
+  height: calc(100% - 3em);
   z-index: -1;
-  overflow: scroll;
+  overflow: hidden;
 }
 
 .q {
@@ -24,6 +23,10 @@ $canvas-left-offset: 200px;
 }
 
 .info-panel {
+  height: 200px;
+  background-color: #eeeeee;
+  opacity: 70%;
+
   .q, .r, .s {
     font-weight: 600;
   }

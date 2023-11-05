@@ -6,7 +6,7 @@
     <span class="s">{{selectedTile.coords.s}}s</span>
   </ng-container>
 </div>
-<div id="canvas">
+<div (drag)="onDrag($event)" (dragstart)="onDragStart($event)" draggable="true" id="canvas">
   <div
     (click)=onMouseClick(tile)
     (mouseenter)="onMouseEnter(tile)"
@@ -16,16 +16,16 @@
     [class.selected]="tile.selected"
     [ngClass]="tile.state"
     [style.height.px]="tileHeight"
-    [style.left.px]="tile.left"
-    [style.top.px]="tile.top"
     [style.width.px]="tileWidth"
+    [style.left.px]="tile.left + dragOffset.x"
+    [style.top.px]="tile.top + dragOffset.y"
     class="tile-hex-flat">
   </div>
   <div
     *ngFor="let tile of tiles$ | async; let i = index;"
     [style.height.px]="tileHeight"
-    [style.left.px]="tile.left"
-    [style.top.px]="tile.top"
+    [style.left.px]="tile.left + dragOffset.x"
+    [style.top.px]="tile.top + dragOffset.y"
     [style.width.px]="tileWidth"
     class="tile-info">
     <div class="i">{{i}}</div>
