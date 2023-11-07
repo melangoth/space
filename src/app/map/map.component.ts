@@ -45,6 +45,8 @@ export class MapComponent {
   readonly tileHeight = Math.sqrt(3) * this.tileRadius;
   readonly fieldRadius = 3;
 
+  showCoordinates = false;
+
   tiles: Map<Coords, Tile> = new Map();
   tiles$ = new ReplaySubject<Tile[]>(1);
   selectedTile: Tile | undefined;

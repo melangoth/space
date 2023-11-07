@@ -24,8 +24,26 @@ $canvas-left-offset: 200px;
 
 .info-panel {
   height: 200px;
-  background-color: #eeeeee;
-  opacity: 70%;
+
+  display: flex;
+  align-items: flex-start;
+
+  > div {
+    width: 200px;
+    margin-right: .5em;
+    padding: 0.2em;
+    background-color: #eeeeee;
+  }
+
+  .settings {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .selected-tile {
+    display: flex;
+    justify-content: space-between;
+  }
 
   .q, .r, .s {
     font-weight: 600;

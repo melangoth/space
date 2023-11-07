@@ -1,10 +1,16 @@
 <div class="info-panel">
-  Selected tile:
-  <ng-container *ngIf="selectedTile">
-    <span class="q">{{selectedTile.coords.q}}q</span>
-    <span class="r">{{selectedTile.coords.r}}r</span>
-    <span class="s">{{selectedTile.coords.s}}s</span>
-  </ng-container>
+  <div class="settings">
+    <div>Show coordinates</div>
+    <div><input type="checkbox" [(ngModel)]="showCoordinates"></div>
+  </div>
+  <div class="selected-tile">
+    <div>Selected tile:</div>
+    <ng-container *ngIf="selectedTile">
+      <span class="q">{{selectedTile.coords.q}}q</span>
+      <span class="r">{{selectedTile.coords.r}}r</span>
+      <span class="s">{{selectedTile.coords.s}}s</span>
+    </ng-container>
+  </div>
 </div>
 <div (drag)="onDrag($event)" (dragstart)="onDragStart($event)" draggable="true" id="canvas">
   <div
@@ -21,16 +27,18 @@
     [style.top.px]="tile.top + dragOffset.y"
     class="tile-hex-flat">
   </div>
-  <div
-    *ngFor="let tile of tiles$ | async; let i = index;"
-    [style.height.px]="tileHeight"
-    [style.left.px]="tile.left + dragOffset.x"
-    [style.top.px]="tile.top + dragOffset.y"
-    [style.width.px]="tileWidth"
-    class="tile-info">
-    <div class="i">{{i}}</div>
-    <div class="q">{{tile.q}}q</div>
-    <div class="r">{{tile.r}}r</div>
-    <div class="s">{{tile.s}}s</div>
-  </div>
+  <ng-container *ngIf="showCoordinates">
+    <div
+      *ngFor="let tile of tiles$ | async; let i = index;"
+      [style.height.px]="tileHeight"
+      [style.left.px]="tile.left + dragOffset.x"
+      [style.top.px]="tile.top + dragOffset.y"
+      [style.width.px]="tileWidth"
+      class="tile-info">
+      <div class="i">{{i}}</div>
+      <div class="q">{{tile.q}}q</div>
+      <div class="r">{{tile.r}}r</div>
+      <div class="s">{{tile.s}}s</div>
+    </div>
+  </ng-container>
 </div>
