@@ -8,13 +8,13 @@ import {
   Routes,
   UrlTree
 } from '@angular/router';
-import {QuickStartComponent} from "./quick-start/quick-start.component";
-import {FreeRouteOneComponent} from "./free-route-one/free-route-one.component";
-import {ProfileComponent} from "./profile/profile.component";
-import {Observable} from "rxjs";
-import {CurrentUserService} from "./services/current-user.service";
-import {LoginComponent} from "./login/login.component";
-import {MapComponent} from "./map/map.component";
+import {QuickStartComponent} from './quick-start/quick-start.component';
+import {FreeRouteOneComponent} from './free-route-one/free-route-one.component';
+import {ProfileComponent} from './profile/profile.component';
+import {Observable} from 'rxjs';
+import {CurrentUserService} from './services/current-user.service';
+import {LoginComponent} from './login/login.component';
+import {MapComponent} from './warlords/map/map.component';
 
 const profileGuard: CanActivateFn = (
   route: ActivatedRouteSnapshot,

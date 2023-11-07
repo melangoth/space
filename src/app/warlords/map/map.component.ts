@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {ReplaySubject} from "rxjs";
+import {ReplaySubject} from 'rxjs';
 
 
 // https://www.redblobgames.com/grids/hexagons/#coordinates
