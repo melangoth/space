@@ -36,10 +36,10 @@ class Tile extends Coords {
 
 @Component({
   selector: 'app-map',
-  templateUrl: './map.component.html',
-  styleUrls: ['./map.component.scss']
+  templateUrl: './world.component.html',
+  styleUrls: ['./world.component.scss']
 })
-export class MapComponent {
+export class WorldComponent {
   readonly tileRadius = 70;
   readonly tileWidth = 2 * this.tileRadius;
   readonly tileHeight = Math.sqrt(3) * this.tileRadius;

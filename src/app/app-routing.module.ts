@@ -14,7 +14,7 @@ import {ProfileComponent} from './profile/profile.component';
 import {Observable} from 'rxjs';
 import {CurrentUserService} from './services/current-user.service';
 import {LoginComponent} from './login/login.component';
-import {MapComponent} from './warlords/map/map.component';
+import {WorldComponent} from './warlords/world/world.component';
 
 const profileGuard: CanActivateFn = (
   route: ActivatedRouteSnapshot,
@@ -49,7 +49,7 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
 
   // warlords
-  {path: 'warlords/map', component: MapComponent}
+  {path: 'warlords/world', component: WorldComponent}
 ];
 
 @NgModule({
