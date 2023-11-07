@@ -36,7 +36,12 @@ $canvas-left-offset: 200px;
 
   .settings {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+
+    > div {
+      display: flex;
+      justify-content: space-between;
+    }
   }
 
   .selected-tile {
@@ -46,6 +51,20 @@ $canvas-left-offset: 200px;
 
   .q, .r, .s {
     font-weight: 600;
+  }
+}
+
+.tile-units {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  border: 1px solid orange;
+
+  display: flex;
+  justify-content: center;
+
+  > div {
+    margin-top: 1em;
   }
 }
 

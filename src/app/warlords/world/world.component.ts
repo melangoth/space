@@ -1,16 +1,10 @@
 import {Component} from '@angular/core';
 import {ReplaySubject} from 'rxjs';
+import {Coords, Unit} from "../model/warlords.model";
+import * as _ from 'lodash';
 
 
 // https://www.redblobgames.com/grids/hexagons/#coordinates
-
-class Coords {
-  constructor(public q: number,
-              public r: number,
-              public s: number
-  ) {
-  }
-}
 
 const UP_LEFT = new Coords(-1, 0, 1);
 const UP = new Coords(0, -1, +1);
@@ -46,10 +40,14 @@ export class WorldComponent {
   readonly fieldRadius = 3;
 
   showCoordinates = false;
+  showUnits = true;
 
-  tiles: Map<Coords, Tile> = new Map();
+  tiles: Map<string, Tile> = new Map();
   tiles$ = new ReplaySubject<Tile[]>(1);
   selectedTile: Tile | undefined;
+
+  units: Map<string, Unit[]> = new Map();
+  units$ = new ReplaySubject<Unit[]>(1);
 
   dragStart = {x: 0, y: 0}
   dragOffset = {x: 0, y: 0}
@@ -67,7 +65,7 @@ export class WorldComponent {
 
         if (coords.s >= this.fieldRadius * -1 && coords.s <= this.fieldRadius) {
           this.tiles.set(
-            coords,
+            coords.key,
             new Tile
             (
               coords,
@@ -80,6 +78,19 @@ export class WorldComponent {
 
       this.tiles$.next([...this.tiles.values()]);
     }
+
+    [
+      new Unit(new Coords(1, -2, 1), 'c', 3),
+      new Unit(new Coords(1, -2, 1), 'i', 7),
+      new Unit(new Coords(1, -1, 0), 'i', 10)
+    ].forEach(unit => {
+      let units = this.units.get(unit.coords.key) || [];
+      this.units.set(unit.coords.key, [...units, unit]);
+    });
+
+    let a = [...this.units.values()];
+    let b = _.flatten(a);
+    this.units$.next(b);
   }
 
   onMouseEnter(tile: Tile) {
