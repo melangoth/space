@@ -1,61 +1,66 @@
-<div class="info-panel">
-  <div class="settings">
-    <div>
-      <div>World:</div>
-      <div>name</div>
+<ng-template #noWorld>
+  Waiting for world...
+</ng-template>
+<ng-container *ngIf="world else noWorld">
+  <div class="info-panel">
+    <div class="settings">
+      <div>
+        <div>World:</div>
+        <div>{{ world.name }}</div>
+      </div>
+      <div>
+        <div>Show coordinates:</div>
+        <div><input [(ngModel)]="showCoordinates" type="checkbox"></div>
+      </div>
+      <div>
+        <div>Show units:</div>
+        <div><input [(ngModel)]="showUnits" type="checkbox"></div>
+      </div>
     </div>
-    <div>
-      <div>Show coordinates:</div>
-      <div><input [(ngModel)]="showCoordinates" type="checkbox"></div>
-    </div>
-    <div>
-      <div>Show units:</div>
-      <div><input [(ngModel)]="showUnits" type="checkbox"></div>
+    <div class="selected-tile">
+      <div>Selected tile:</div>
+      <ng-container *ngIf="selectedTile">
+        <span class="q">{{selectedTile.coords.q}}q</span>
+        <span class="r">{{selectedTile.coords.r}}r</span>
+        <span class="s">{{selectedTile.coords.s}}s</span>
+      </ng-container>
     </div>
   </div>
-  <div class="selected-tile">
-    <div>Selected tile:</div>
-    <ng-container *ngIf="selectedTile">
-      <span class="q">{{selectedTile.coords.q}}q</span>
-      <span class="r">{{selectedTile.coords.r}}r</span>
-      <span class="s">{{selectedTile.coords.s}}s</span>
-    </ng-container>
-  </div>
-</div>
-<div (drag)="onDrag($event)" (dragstart)="onDragStart($event)" draggable="true" id="canvas">
-  <div
-    (click)=onMouseClick(tile)
-    (mouseenter)="onMouseEnter(tile)"
-    (mouseleave)="onMouseLeave(tile)"
-    *ngFor="let tile of tiles$ | async"
-    [class.hovered]="tile.mouseOver"
-    [class.selected]="tile.selected"
-    [ngClass]="tile.state"
-    [style.height.px]="tileHeight"
-    [style.width.px]="tileWidth"
-    [style.left.px]="tile.left + dragOffset.x"
-    [style.top.px]="tile.top + dragOffset.y"
-    class="tile-hex-flat">
-    <ng-container *ngIf="showUnits && units.get(tile.coords.key) as tileUnits">
-      <div class="tile-units">
-        <div>
-          <span *ngFor="let unit of tileUnits">{{unit.size}}{{unit.type}}</span>
+  <div (drag)="onDrag($event)" (dragstart)="onDragStart($event)" draggable="true" id="canvas">
+    <div
+      *ngFor="let tile of world.tiles"
+      (click)=onMouseClick(tile)
+      (mouseenter)="onMouseEnter(tile)"
+      (mouseleave)="onMouseLeave(tile)"
+      [class.hovered]="tile.mouseOver"
+      [class.selected]="tile.selected"
+      [ngClass]="tile.state"
+      [style.height.px]="world.tileHeight"
+      [style.width.px]="world.tileWidth"
+      [style.left.px]="tile.left + dragOffset.x"
+      [style.top.px]="tile.top + dragOffset.y"
+      class="tile-hex-flat">
+      <ng-container *ngIf="showUnits && world.getUnitAt(tile.coords.key) as tileUnits">
+        <div class="tile-units">
+          <div>
+            <span *ngFor="let unit of tileUnits">{{unit.size}}{{unit.type}}</span>
+          </div>
         </div>
+      </ng-container>
+    </div>
+    <ng-container *ngIf="showCoordinates">
+      <div
+        *ngFor="let tile of world.tiles; let i = index;"
+        [style.height.px]="world.tileHeight"
+        [style.left.px]="tile.left + dragOffset.x"
+        [style.top.px]="tile.top + dragOffset.y"
+        [style.width.px]="world.tileWidth"
+        class="tile-info">
+        <div class="i">{{i}}</div>
+        <div class="q">{{tile.q}}q</div>
+        <div class="r">{{tile.r}}r</div>
+        <div class="s">{{tile.s}}s</div>
       </div>
     </ng-container>
   </div>
-  <ng-container *ngIf="showCoordinates">
-    <div
-      *ngFor="let tile of tiles$ | async; let i = index;"
-      [style.height.px]="tileHeight"
-      [style.left.px]="tile.left + dragOffset.x"
-      [style.top.px]="tile.top + dragOffset.y"
-      [style.width.px]="tileWidth"
-      class="tile-info">
-      <div class="i">{{i}}</div>
-      <div class="q">{{tile.q}}q</div>
-      <div class="r">{{tile.r}}r</div>
-      <div class="s">{{tile.s}}s</div>
-    </div>
-  </ng-container>
-</div>
+</ng-container>
