@@ -1,20 +1,21 @@
-import * as _ from "lodash";
+import * as _ from 'lodash';
 
 export class World {
   public readonly tileRadius = 70;
   public readonly tileWidth = 2 * this.tileRadius;
   public readonly tileHeight = Math.sqrt(3) * this.tileRadius;
 
-  private tilesMap: Map<string, Tile> = new Map();
-  private unitsMap: Map<string, Unit[]> = new Map();
+  public tilesMap: Map<string, Tile> = new Map();
+  public unitsMap: Map<string, Unit[]> = new Map();
+  public recruitsMap = new Map<string, Unit>();
 
   constructor(
     public name: string,
     public coords: Coords[],
     private initialUnits: Unit[]
   ) {
-    const fieldLeftOffset = /*fieldRadius * 3 / 4 * TILE_WIDTH*/ 0
-    const fieldTopOffset = /*fieldRadius * 0.5 * TILE_HEIGHT*/ 0
+    const fieldLeftOffset = /*fieldRadius * 3 / 4 * TILE_WIDTH*/ 0;
+    const fieldTopOffset = /*fieldRadius * 0.5 * TILE_HEIGHT*/ 0;
 
     this.coords.forEach(coord => {
       this.tilesMap.set(
@@ -28,10 +29,18 @@ export class World {
       )
     });
 
+    this.initialUnits.forEach(unit => this.addUnits(unit));
+  }
 
-    this.initialUnits.forEach(unit => {
-      let units = this.unitsMap.get(unit.coords.key) || [];
-      this.unitsMap.set(unit.coords.key, [...units, unit]);
+  get units(): Unit[] {
+    let unitArrays = [...this.unitsMap.values(), ...this.recruitsMap.values()];
+    return _.flatten(unitArrays);
+  }
+
+  updateRecruits(recruits: Unit[]) {
+    this.recruitsMap = new Map<string, Unit>();
+    recruits.forEach(recruit => {
+      this.recruitsMap.set(recruit.coords.key + recruit.type, recruit);
     });
   }
 
@@ -39,14 +48,18 @@ export class World {
     return [...this.tilesMap.values()];
   }
 
-  get units(): Unit[] {
-    let unitArrays = [...this.unitsMap.values()];
-    return _.flatten(unitArrays);
+  addUnits(unit: Unit) {
+    let units = this.unitsMap.get(unit.coords.key) || [];
+    this.unitsMap.set(unit.coords.key, [...units, unit]);
   }
 
   getUnitAt(coords: string | Coords): Unit[] | undefined {
     const key = (coords instanceof Coords) ? coords.key : coords;
-    return this.unitsMap.get(key);
+    const units: Unit[] = [];
+    units.push(...this.unitsMap.get(key) || []);
+    const recruits = [...this.recruitsMap.values()].filter(unit => unit.coords.key.startsWith(key));
+    units.push(...recruits);
+    return units;
   }
 }
 
@@ -83,5 +96,10 @@ export class Tile extends Coords {
   ) {
     super(coords.q, coords.r, coords.s);
     this.state = 'normal';
+  }
+}
+
+export class Player {
+  constructor(public name: string, public color: string) {
   }
 }

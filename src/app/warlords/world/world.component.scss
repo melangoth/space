@@ -1,4 +1,7 @@
 $canvas-left-offset: 200px;
+$color-q-primary: #009000;
+$color-r-primary: #000090;
+$color-s-primary: #900000;
 
 #canvas {
   background-color: lightskyblue;
@@ -9,15 +12,18 @@ $canvas-left-offset: 200px;
 }
 
 .q {
-  color: #009000;
+  color: $color-q-primary;
+  border-color: $color-q-primary;
 }
 
 .r {
-  color: #000090;
+  color: $color-r-primary;
+  border-color: $color-r-primary;
 }
 
 .s {
-  color: #900000;
+  color: $color-s-primary;
+  border-color: $color-s-primary;
 }
 
 .info-panel {
@@ -51,6 +57,7 @@ $canvas-left-offset: 200px;
 
   .q, .r, .s {
     font-weight: 600;
+    margin-left: .2em;
   }
 }
 
