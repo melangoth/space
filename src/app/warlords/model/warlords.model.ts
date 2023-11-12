@@ -9,7 +9,6 @@ export class World {
   private unitsMap: Map<string, Unit[]> = new Map();
 
   constructor(
-    private fieldRadius: number,
     public name: string,
     public coords: Coords[],
     private initialUnits: Unit[]
@@ -18,17 +17,15 @@ export class World {
     const fieldTopOffset = /*fieldRadius * 0.5 * TILE_HEIGHT*/ 0
 
     this.coords.forEach(coord => {
-      if (coord.s >= this.fieldRadius * -1 && coord.s <= this.fieldRadius) {
-        this.tilesMap.set(
-          coord.key,
-          new Tile
-          (
-            coord,
-            fieldLeftOffset + (this.fieldRadius + coord.q) * 3 / 4 * this.tileWidth,
-            fieldTopOffset + (this.fieldRadius + coord.r) * this.tileHeight + coord.q * 0.5 * this.tileHeight,
-          )
+      this.tilesMap.set(
+        coord.key,
+        new Tile
+        (
+          coord,
+          fieldLeftOffset + coord.q * 3 / 4 * this.tileWidth,
+          fieldTopOffset + coord.r * this.tileHeight + coord.q * 0.5 * this.tileHeight,
         )
-      }
+      )
     });
 
 

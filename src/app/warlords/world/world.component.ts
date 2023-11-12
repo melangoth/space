@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {first} from 'rxjs';
 import {Coords, Tile, World} from "../model/warlords.model";
 import {WorldService} from "../services/world.service";
+import * as _ from "lodash";
 
 
 // https://www.redblobgames.com/grids/hexagons/#coordinates
@@ -31,7 +32,12 @@ export class WorldComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.worldService.world$.pipe(first()).subscribe(world => this.world = world);
+        this.worldService.world$.pipe(first()).subscribe(world => {
+          this.world = world;
+          const y = (_.maxBy(world.coords, 's')?.s || 0);
+          const x = (_.minBy(world.coords, 'q')?.q || 0) * -1;
+          this.dragOffset = {x: x * world.tileWidth * 3/4, y: y * world.tileHeight}
+        });
     }
 
     onMouseEnter(tile: Tile) {

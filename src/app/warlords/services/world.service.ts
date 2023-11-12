@@ -7,17 +7,17 @@ export class WorldService {
   public readonly fieldRadius = 3;
 
   get world$(): Observable<World> {
-
     const coords: Coords[] = [];
     for (let q = this.fieldRadius * -1; q <= this.fieldRadius; q++) {
       for (let r = this.fieldRadius * -1; r <= this.fieldRadius; r++) {
-
-        coords.push(new Coords(q, r, 0 - q - r));
+        const s = 0 - q - r;
+        if (s >= this.fieldRadius * -1 && s <= this.fieldRadius) {
+          coords.push(new Coords(q, r, s));
+        }
       }
     }
 
     return of(new World(
-      this.fieldRadius,
       'Dummy World',
       coords,
       [
